@@ -7,7 +7,7 @@ console.log(user.checkValidity());
 
 signup.addEventListener("click", handlesignup);
 
-const url = "http://localhost:5000/api/auth/signup";
+const url = "https://kgp-connect.onrender.com/api/auth/signup";
 
 async function handlesignup(e) {
   e.preventDefault();

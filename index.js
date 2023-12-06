@@ -29,7 +29,7 @@ app.use(bodyParser.json());
 // Enable CORS
 app.use(
   cors({
-    origin: "http://localhost:5000/",
+    origin: "https://kgp-connect.onrender.com/",
     credentials: true,
   })
 );

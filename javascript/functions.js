@@ -7,7 +7,7 @@ export function renderMsgs() {
   const user2 = document.getElementById("inchat-name").innerHTML;
   document.getElementById("scroll-container").innerHTML = "";
   fetch(
-    `http://localhost:5000/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
+    `https://kgp-connect.onrender.com/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
     { method: "GET" }
   )
     .then((res) => res.json())
@@ -42,7 +42,7 @@ export function searchMsgs(value) {
   const searchPattern = new RegExp(value, "i");
   document.getElementById("scroll-container").innerHTML = "";
   fetch(
-    `http://localhost:5000/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
+    `https://kgp-connect.onrender.com/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
     { method: "GET" }
   )
     .then((res) => res.json())
@@ -153,7 +153,7 @@ export function isOffline() {
 
 export async function updateMsgs(a, b, c) {
   await fetch(
-    `http://localhost:5000/api/auth/updatemsgs?sender=${a}&receiver=${b}&msg=${c}`,
+    `https://kgp-connect.onrender.com/api/auth/updatemsgs?sender=${a}&receiver=${b}&msg=${c}`,
     { method: "PUT" }
   ).catch((err) => {
     console.log(err);
@@ -242,7 +242,7 @@ export async function renderChats(username) {
   
  
   try {
-    await fetch(`http://localhost:5000/api/auth/getchats?user=${username}`, {
+    await fetch(`https://kgp-connect.onrender.com/api/auth/getchats?user=${username}`, {
       method: "GET",
     })
       .then((res) => res.json())
@@ -280,7 +280,7 @@ export async function renderChats(username) {
 
 export async function updateChats(user, newUser) {
   await fetch(
-    `http://localhost:5000/api/auth/updatechats?user=${user}&username=${newUser}`,
+    `https://kgp-connect.onrender.com/api/auth/updatechats?user=${user}&username=${newUser}`,
     { method: "PUT" }
   ).catch((err) => {
     console.error("Error:", err);

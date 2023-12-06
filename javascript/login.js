@@ -4,7 +4,7 @@ const login = document.getElementById("login");
 // console.log(user_para);
 login.addEventListener("click", handleLogin);
 
-const url = "http://localhost:5000/api/auth/login";
+const url = "https://kgp-connect.onrender.com/api/auth/login";
 
 async function handleLogin(e) {
   e.preventDefault();

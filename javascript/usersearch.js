@@ -26,7 +26,7 @@ searchBox.addEventListener("input", async function () {
   if (searchBox.value) {
     user_list.innerHTML = "";
     await fetch(
-      `http://localhost:5000/api/auth/search?search=${searchBox.value}`,
+      `https://kgp-connect.onrender.com/api/auth/search?search=${searchBox.value}`,
       {
         method: "GET",
       }
