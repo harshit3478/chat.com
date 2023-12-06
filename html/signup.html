@@ -1,0 +1,53 @@
+<title>
+    SIGN UP
+</title>
+<head>
+    <meta charset="utf-8">
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+            <link href="../css/output.css" rel="stylesheet">
+            </link>
+        </meta>
+    </meta>
+</head>
+<body class="bg-gradient-to-r from-blue-500 from-20% via-indigo-400 via-40% to-purple-500 ">
+    <div class="my-40 font-bold max-w-md mx-auto bg-white rounded-xl shadow-xl ">
+        <form class="grid" method="post"  action="/signup">
+            <label class="block m-4">
+                <span class="block text-sm font-medium text-slate-700 my-3">
+                    Username
+                </span>
+                <input class="mt-1 block w-full px-3 py-2 rounded-md text-sm border-1 border-black border-solid shadow-sm placeholder-slate-400 focus:invalid:text-pink-400 focus:invalid:ring focus:invalid:ring-pink-400 focus:ring focus:ring-sky-400 focus:border-0" type="text" name="username" placeholder="Username" id="username" required />
+                <p class="peer:invalid:block text-sm shrink-0 hidden text-pink-400" id="msg-para-user">
+                   user already exists!
+                </p>
+            </label>
+            <label class="block m-4">
+                <span class="block text-sm font-medium text-slate-700 my-3">
+                    Password
+                </span>
+                <input class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 " type="password" name="password" id="password" placeholder="Password" required />
+                <p class="peer:invalid:block text-sm shrink-0 hidden text-pink-400" id="msg-para-pass">
+                    password must be atleast 8 characters long !!
+                 </p>
+            </label>
+            <label class="block m-4">
+                <span class="block text-sm font-medium text-slate-700 my-3">
+                    Email
+                </span>
+                <input class="peer mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 " type="email" name="email" placeholder="Email" id="email" required />
+                <p class="peer:invalid:block text-sm shrink-0 hidden text-pink-400" id="msg-para-email">
+                    email already exists!
+                 </p>
+            </label>
+            <div class="space-x-5 justify-around flex items-center ">
+            <a class="text-md text-slate-400 hover:underline " href="/login">Login instead</a>
+            <button class="bg-gradient-to-r from-indigo-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 max-w-sm m-auto text-slate-800 font-medium text-white rounded-xl p-2 my-3 focus:ring focus:ring-sky-500" type="submit" id="signup">
+                Sign up 
+            </button>
+        </div>
+        </form>
+    </div>
+    <script src="../javascript/signup.js" type="text/javascript"></script>
+    <!-- <script src="../javascript/one.js" type="text/javascript"></script> -->
+
+</body>
