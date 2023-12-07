@@ -11,9 +11,9 @@ const { updatechats } = require('./updateChats');
 
 router.route('/login').post(login);
 router.route('/signup').post(signup);
-router.route('/search').get( search);
+router.route('/search').get(search);
 router.route('/updatemsgs').put(updatemsgs);
-router.route('/getmsgs').get( getmsgs)
+router.route('/getmsgs').get(getmsgs)
 router.route("/updatechats").put(updatechats)
 router.route("/getchats").get(getchats)
 router.route("/ischat").get(ischat)

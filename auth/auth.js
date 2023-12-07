@@ -64,6 +64,7 @@ exports.login = async (req, res, next) => {
     if (person) {
       bcrypt.compare(password, person.password).then((result) => {
         if (result) {
+          console.log(result)
           //json web token for authorization
           const maxAge = 3 * 60 * 60;
           const token = jwt.sign(

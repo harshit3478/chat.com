@@ -9,21 +9,21 @@
   <body
     class="selection:text-blue-500 dark:bg-slate-800 min-h-screen fixed right-0 w-full"
   >
-    <section class="navbar" style="min-width:700px">
+    <section class="navbar md:min-w-700" >
       <ul
-        class="bg-gradient-to-r from-emerald-200 to-50% via-sky-300 to-cyan-500 dark:bg-gradient-to-l dark:from-gray-600 dark:to-slate-800 border-spacing-1 border-b-2 border-black border-solid sticky top-0 items-center flex justify-end items h-1/6"
+        class="bg-gradient-to-r from-emerald-200 to-50% via-sky-300 to-cyan-500 dark:bg-gradient-to-l dark:from-gray-600 dark:to-slate-800 border-spacing-1 border-b-2 border-black border-solid sticky top-0 items-center flex justify-center md:justify-end items md:h-1/6"
       >
         <li>
           <a href="/logout"
             ><button
-              class="bg-green-400 dark:bg-pink-400 rounded-md font-semibold  font-sans text-lg  mr-28 px-2 p-1"
+              class="bg-green-400 dark:bg-pink-400 rounded-md font-semibold  font-sans md:text-lg  md:mr-28 px-2 ml-5"
             >
               Log out
             </button></a
           >
         </li>
       
-        <div class="flex p-4 space-x-8 right-0 mr-20 dark:text-white">
+        <div class="flex p-4 space-x-8 right-0 md:mr-20 items-center dark:text-white">
           <li class="p-1">
             <p
               class="font-md text-md font-semibold my-1 uppercase"
@@ -35,7 +35,7 @@
             ></p>
           </li>
           <img
-            class="w-14 h-14 rounded-full"
+            class="md:w-14 md:h-14  w-10 h-10 rounded-full"
             src="/chat.png"
             alt="userimage"
           />
@@ -59,10 +59,9 @@
         <li id="system" class="hover:bg-slate-50 hover:text-black focus:bg-slate-50 p-1 flex justify-start items-center rounded-sm"><span class="mx-1" ><img class="w-5 rounded-full " src="/monitor.png" alt=""></span><span>System</span></li>
     </ul>
     </section>
-    <div class="container flex min-w-full font-thin h-">
-      <div
-        class="left bg-gradient-to-b from-sky-300 to-blue-400 dark:bg-slate-800  mx-2 border-r border-black border-solid  inline-block w-1/4"
-        style="max-width: 30vw; min-width:320px;min-height: 87vh;"
+    <div class="container bg-gradient-to-b from-sky-300 to-blue-400 dark:bg-slate-900 flex min-w-full font-thin h-">
+      <div class="left bg-gradient-to-b from-sky-300 to-blue-400 dark:bg-slate-800  border-r border-black border-solid  inline-block w-1/4"
+        style=" min-width:320px;min-height: 87vh;"
       >
         <div class="searchbox stickey flex items-center m-0">
           <input
@@ -82,50 +81,50 @@
           </button>
         </div>
         <div
-          class="user-list-container hidden  bg-transparent  p-2 w-1/4  fixed ml-1 z-10 m-0"
+          class="user-list-container hidden  bg-transparent  p-2 md:w-1/4 w-screen fixed ml-1 z-10 m-0"
         >
           <ul
             id="user-list"
-            class="p-2 flex h-screen bg-transparent overflow-y-scroll flex-col first:-mt-6 divide-y divide-slate-200 dark:divide-white"
+            class="p-2 flex h-screen bg-transparent overflow-y-scroll no-scrollbar flex-col first:-mt-6 divide-y divide-slate-200 dark:divide-white"
           ></ul>
         </div>
-        <div id="chat-list" class="m-0 p-0 overflow-y-scroll divide-y divide-slate-200 dark:divide-slate-600" style="max-height:60vh;"></div>
+        <div id="chat-list" class="m-0 p-0 overflow-y-scroll no-scrollbar divide-y divide-slate-200 dark:divide-slate-600" style="max-height:60vh;"></div>
       </div>
 
-      <div
-        class="right  peer hidden relative bg-transparent dark:bg-slate-800 w-3/4"
+      <div  class="right  peer hidden relative bg-transparent dark:bg-slate-800 w-3/4"
         style="min-height: 87vh;min-width:450px"
       >
         <div class="flex items-center">
           <div
-            class="dark:bg-slate-800 dark:text-white border-b-2 border-solid border-black space-x-3 flex items-center m-1 p-1 min-w-full"
+            class="user-info-div dark:bg-slate-800 dark:text-white border-b-2 border-solid border-black space-x-3 flex items-center m-1 p-1 min-w-full"
           >
-            <img src="/download.png" class="rounded-full w-16 h-16 m-2" />
+            <img class="w-5 m-1 dark:invert back-btn" src="/back.png" alt="">
+            <img src="/download.png" class="rounded-full w-10 md:w-16 md:h-16 md:m-2" id="current-chat-img" />
             <div class="">
-              <p id="inchat-name" class="font-semibold text-left text-xl p-1">chatter's name</p>
-              <p id="last-active" class="text-md p-1">last seen recently</p>
+              <p id="inchat-name" class="font-semibold text-left md:text-xl md:p-1">chatter's name</p>
+              <p id="last-active" class="md:text-md text-sm dark:text-white md:p-1">last seen recently</p>
             </div>
 
             <input
               type="text"
               placeholder="search chat"
-              class="font-semibold text-black my-4 ml-40 p-1 rounded w-1/5 outline outline-1 outline-black placeholder:text-lg placeholder:font-semibold"
+              class="font-semibold text-black  m-2 w-2/4 md:my-4 md:ml-40 p-1 rounded md:w-1/5 outline outline-1 outline-black placeholder:text-lg placeholder:font-semibold"
               id="search-msgs"
             />
             <img
               src="/icons8-search-50.png"
               alt="search icon"
-              class="rounded-full w-8 h-8 -ml-2.5 p-1"
+              class="md:rounded-full md:w-8 md:h-8 md:-ml-2.5 md:p-1 hidden"
             />
           </div>
         </div>
         <div
           id="scroll-container"
-          class="scroll-auto dark:bg-slate-800 first:mt-8 last:mb-5 dark:text-white overflow-y-scroll scroll-m-4 flex flex-col"
+          class="scroll-auto dark:bg-slate-800 first:mt-8 last:mb-5 dark:text-white overflow-y-scroll w-full no-scrollbar scroll-m-4 flex flex-col"
           style="max-height: 60vh"
         ></div>
         <div class="absolute bottom-2 m-2 w-full flex justify-center">
-          <form class="p-1 flex w-4/5" action="" id="form">
+          <form class="md:p-1 md:flex md:w-4/5 p-1 flex w-4/5 relative -left-5" action="" id="form">
             <input
               class="w-full rounded-md outline outline-1 outline-black placeholder:text-md placeholder:font-semibold placeholder:m-2"
               autocomplete="off"
@@ -143,7 +142,7 @@
           </form>
         </div>
       </div>
-      <div class=" dark:bg-slate-800  w-3/4 bg-gradient-to-b from-sky-300 to-blue-400" style="min-height: 87vh;"  id="homepage-img"></div>
+      <div class=" dark:bg-slate-800  w-3/4 bg-gradient-to-b from-sky-300 to-blue-400 flex justify-center items-center" style="min-height: 87vh;"  id="homepage-img"><span class=""><img class="w-9 m-1 bg-blend-multiply" src="/padlock.png" alt=""></span><span class="text-xl font-semibold">End to end encrypted messages</span> </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script type="module" src="../javascript/usersearch.js"></script>

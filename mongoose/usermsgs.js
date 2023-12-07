@@ -6,7 +6,7 @@ const UserMessages = new mongoose.Schema({
   user2: { type: String, required: true },
   messages: [
     {
-      message: { type: String, required: true },
+      message: { type: mongoose.SchemaTypes.Mixed, required: true },
       timestamp: {
         type: String, default: () => {
           const time = new Date();

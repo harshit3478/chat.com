@@ -15,7 +15,7 @@ const ChatsSchema = new mongoose.Schema({
             return ct;
           }
         },
-        lastmsg :{type:String},
+        lastmsg :{type: mongoose.SchemaTypes.Mixed} ,
         sender : {type:String},
       },
     ],

@@ -4,17 +4,24 @@ const jwtSecret = process.env.JWT_SECRET;
 
 exports.userAuth = (req, res, next) => {
   const token = req.cookies.jwt;
-  if (token) {
-    jwt.verify(token, jwtSecret, (err, decodedToken) => {
-      if (err) {
-        res.status(401).send({ message: "Not Authorized", error: err });
-      } else {
-        next();
-      }
-    });
-  } else {
-    res.status(401).send("don't try shortcut")
-    // location.assign('/')
-    
+  try {
+    if (token) {
+      jwt.verify(token, jwtSecret, (err, decodedToken) => {
+        if (err) {
+          res.status(401).send({ message: "Not Authorized", error: err });
+        } else {
+          next();
+        }
+      });
+    } else {
+      res.status(401)
+      .redirect('/')
+      // location.assign('/')
+      
+    }
+  } catch (error) {
+    console.error("Error:" , error)
+    res.status(400).send(error);
   }
+  
 };

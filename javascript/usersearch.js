@@ -42,10 +42,6 @@ searchBox.addEventListener("input", async function () {
         } else {
           document
             .querySelector(".user-list-container")
-            .classList.add("hidden"); //hide the user-list
-
-          document
-            .querySelector(".user-list-container")
             .classList.remove("hidden");
           user_list.innerHTML =
             "<h1 class='text-center bg-white'> No User Found </h1>";
