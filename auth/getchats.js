@@ -3,6 +3,7 @@ const { ChatList } = require("../mongoose/chatlist");
 exports.getchats = async (req, res, next) => {
   const chat = await ChatList.findOne({ user: req.query.user });
   if (chat) {
+    chat.reverse();
     res.status(200).send(chat);
   }
   else {
