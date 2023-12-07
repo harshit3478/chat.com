@@ -274,7 +274,7 @@ export async function renderChats(username) {
             <img src="/chat.png" alt="ntg" class="rounded-full w-14 h-14 mx-8 my-2"/>
             <div class="mx-2 my-1 text-left">
               <h2 id='chatlist-username' class="font-bold dark:text-white text-lg ">${chat.username}</h2>
-              <h4 class="text-slate-300 whitespace-pre">${(chat.sender!=chat.username?'you' :chat.username)}:${chat.lastmsg}</h4>
+              <h4 class="text-slate-300 whitespace-pre">${(chat.sender?(chat.sender!=chat.username?'you' :chat.username):'')} ${(chat.sender?' : ':'')}${(chat.lastmsg?chat.lastmsg:'')}</h4>
             </div>
           </li>
         </button>`;

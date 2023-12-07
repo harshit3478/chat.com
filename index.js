@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Enable CORS
-const allowedOrigins = ["http://localhost:5000", "http://192.168.164.183:5000", "https://kgp-connect.onrender.com/"];
+const allowedOrigins = ["http://localhost:5000", "http://192.168.164.183:5000", "https://kgp-connect.onrender.com"];
 
 app.use(
   cors({
