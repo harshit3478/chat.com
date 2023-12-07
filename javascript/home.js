@@ -21,7 +21,9 @@ export const form = document.getElementById("form");
 export var socket = io();
 isChatListClick();
 switchTheme();
-
+if (localStorage.getItem('lastChat')) {
+  enterChat(localStorage.getItem('lastChat'))
+}
 //
 try {
   const data = JSON.parse(localStorage.getItem("userData"));
@@ -90,9 +92,7 @@ try {
 
 ifPhone()
 
-if (localStorage.getItem('lastChat')) {
-  enterChat(localStorage.getItem('lastChat'))
-}
+
 
 const searchMessages = document.getElementById('search-msgs')
 searchMessages.addEventListener('input', function () {

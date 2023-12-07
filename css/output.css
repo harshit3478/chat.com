@@ -783,6 +783,10 @@ video {
   height: 2.5rem;
 }
 
+.h-13 {
+  height: 13vh;
+}
+
 .h-14 {
   height: 3.5rem;
 }
