@@ -16,7 +16,7 @@ export function renderMsgs() {
       console.log(data);
       data.map((e) => {
         if (e.sender === user1) {
-          let html = `<div id='scrt-msgs' class=" md:sent md:flex md:flex-col md:justify-end md:mr-3 sent flex flex-col justify-end " style='align-items:end;width:95%' id="msg-sent">  <p id='themsg'  class=" md:block md:dark:bg-neutral-950 md:p-1 md:text-white md:bg-indigo-400 md:w-fit md:rounded-md md:px-2 md:font-semibold md:text-lg md:mt-4 md:mr-4 block dark:bg-neutral-950 py-0.5 text-white bg-indigo-400 w-fit rounded-md px-2 font-semibold text-lg mt-2 mr-1">${e.message}</p><p class='md:text-sm md:text-slate-400 md:mr-4 md:shrink-0 text-sm text-slate-400 mr-1 shrink-0'>${e.timestamp}</p></div>`;
+          let html = `<div id='scrt-msgs' class="sent md:flex md:flex-col md:justify-end md:mr-3 sent flex flex-col justify-end " style='align-items:end;width:95%' id="msg-sent">  <p id='themsg'  class=" md:block md:dark:bg-neutral-950 md:p-1 md:text-white md:bg-indigo-400 md:w-fit md:rounded-md md:px-2 md:font-semibold md:text-lg md:mt-4 md:mr-4 block dark:bg-neutral-950 py-0.5 text-white bg-indigo-400 w-fit rounded-md px-2 font-semibold text-lg mt-2 mr-1">${e.message}</p><p class='md:text-sm md:text-slate-400 md:mr-4 md:shrink-0 text-sm text-slate-400 mr-1 shrink-0'>${e.timestamp}</p></div>`;
           document.getElementById("scroll-container").innerHTML += html;
         } else {
           let html = `<div id='scrt-msgs' class="received w-full flex flex-col justify-start"  style='align-items:start' id="msg-rcv">
@@ -32,7 +32,7 @@ export function renderMsgs() {
     });
   autoScroll();
 }
-export function playAudio(){
+export function playAudio() {
   var click = new Audio('/click.mp3')
   click.play();
 }
@@ -115,40 +115,52 @@ export function switchTheme() {
 export function isTyping() {
   //typing indicator logic
   field.addEventListener("input", function () {
-    socket.emit("typing", document.getElementById("inchat-name").innerHTML);
+    socket.emit("typing", { sender: document.getElementById('user-name').innerHTML, receiver:document.getElementById("inchat-name").innerHTML  })
   });
   const userType =
     JSON.parse(localStorage.getItem("userData")).username + "typing";
-  socket.on(userType, function () {
-    var head = document.getElementById("last-active");
-    head.textContent = "typing...";
-    setTimeout(() => {
-      head.innerHTML = `<span class="text-green-400"> ●</span> <span  > Online </span>`;
-    }, 1500);
+  socket.on(userType, function (sender) {
+
+    // console.log(sender, document.getElementById("inchat-name").innerHTML)
+    if (sender === document.getElementById("inchat-name").innerHTML) {
+
+      var head = document.getElementById("last-active");
+      head.textContent = "typing...";
+      setTimeout(() => {
+        head.innerHTML = `<span class="text-green-400"> ●</span> <span  > Online </span>`;
+      }, 1500);
+    }
   });
 }
 export function isOnline() {
-  socket.emit("Online", document.getElementById("inchat-name").innerHTML);
-
-  const userType =
-    JSON.parse(localStorage.getItem("userData")).username + "online";
-  socket.on(userType, function () {
-    var head = document.getElementById("last-active");
-    setTimeout(() => {
-      head.innerHTML = `<span class="text-green-400"> ●</span> <span  > Online </span>`;
-    }, 1500);
-  });
+  socket.on('connection' , ()=>{
+    socket.emit("Online", { sender: document.getElementById("inchat-name").innerHTML, receiver: document.getElementById('user-name').innerHTML });
+  
+    const userType = JSON.parse(localStorage.getItem("userData")).username + "online";
+  
+    socket.on(userType, function (data) {
+      if (data === document.getElementById("inchat-name").innerHTML) {
+        var head = document.getElementById("last-active");
+        setTimeout(() => {
+          head.innerHTML = `<span class="text-green-400"> ●</span> <span  > Online </span>`;
+        }, 1500);
+      }
+    });
+  })
 }
 export function isOffline() {
-  socket.emit("Offline", document.getElementById("inchat-name").innerHTML);
+  socket.emit("Offline", {sender : document.getElementById("inchat-name").innerHTML , receiver : document.getElementById('user-name').innerHTML });
 
   const userType =
     JSON.parse(localStorage.getItem("userData")).username + "offline";
   socket.on(userType, function () {
-    var head = document.getElementById("last-active");
-    setTimeout(() => {
-      head.textContent = "last seen recently";
-    }, 1000);
+    if(data === document.getElementById("inchat-name").innerHTML ){
+      var head = document.getElementById("last-active");
+      setTimeout(() => {
+        head.textContent = "last seen recently";
+      }, 1000);
+
+    }
   });
 }
 
@@ -180,18 +192,19 @@ export async function mapUserList(arr) {
   });
 }
 export async function enterChat(inChatName) {
-  if(is_responsive){
+  if (is_responsive) {
     document.querySelector('.left').classList.add('hidden')
   };
   document.querySelector(".right").classList.remove("hidden");
   document.querySelector(".left").classList.remove("bg-gradient-to-b");
   document.getElementById("homepage-img").classList.add("hidden");
-  
+
   document.getElementById("inchat-name").innerHTML = inChatName;
   document.getElementById("last-active").innerHTML = "last seen recently ";
   renderMsgs();
   autoScroll();
   localStorage.setItem('lastChat', inChatName)
+  renderChats(document.getElementById('user-name').innerHTML)
 }
 export async function isChatListClick() {
   let i = 0;
@@ -205,6 +218,7 @@ export async function isChatListClick() {
       const usernameElement = on_chat2[i];
       if (usernameElement) {
         enterChat(usernameElement.innerHTML);
+        // 
       }
     });
   });
@@ -225,7 +239,7 @@ export async function isUserListClick() {
       var flag = false;
       event.preventDefault();
       document.querySelector(".user-list-container").classList.add("hidden")
-      if(is_responsive){
+      if (is_responsive) {
         document.querySelector('.left').classList.add('hidden')
       }; //hide the user-list
       const userElement = userlist[j];
@@ -244,44 +258,59 @@ export async function isUserListClick() {
     });
   });
 }
-export function ifBackBtnClicked(){
-  if(is_responsive){
-    document.querySelector(".back-btn").addEventListener("click" , (e)=>{
-        document.querySelector('.left').classList.remove('hidden')
-        document.querySelector('.right').classList.add('hidden')
-          localStorage.removeItem('lastChat')
-    })};
+export function ifBackBtnClicked() {
+  if (is_responsive) {
+    document.querySelector(".back-btn").addEventListener("click", (e) => {
+      document.querySelector('.left').classList.remove('hidden')
+      document.querySelector('.right').classList.add('hidden')
+      localStorage.removeItem('lastChat')
+    })
+  };
 }
 export async function renderChats(username) {
   const htmlArray = [];
   document.getElementById("chat-list").innerHTML = "";
-  
- 
   try {
     await fetch(`https://kgp-connect.onrender.com/api/auth/getchats?user=${username}`, {
       method: "GET",
     })
       .then((res) => res.json())
       .then(async (data) => {
-       
-        
+        if(localStorage.getItem('lastChat')){
+          console.log("is chat ")
+          var i = 0 ; var j= 0;
 
-        for (const chat of data.chats) {
+          for (const chat of data.chats) {
+            console.log(chat.username , localStorage.getItem('lastChat'))
+            if(chat.username===localStorage.getItem('lastChat')){
+              j = i;
+            }
+            i = i+1;
+          } 
 
+          const currenttop = await data.chats.splice(j ,1);
+          // data.chats = await data.chats.splice(j ,1);
+          console.log("first" , data.chats ,'currenttp' , currenttop)
+          // data.chats =  await data.chats.reverse();
+          // console.log("second" , data.chats)
+          await data.chats.unshift(currenttop[0]);
+          // console.log("third" , data.chats)
+          // data.chats = await data.chats.reverse();
+          console.log("final" , data.chats)
 
+        }
+for (const chat of data.chats) {
           const chatHtml = `<button id="in-chat" class="w-full overflow-hidden">
           <li class="chat  list-none  m-0 p-0 flex items-center  hover:bg-slate-200" >
             <img src="/chat.png" alt="ntg" class="rounded-full w-14 h-14 mx-8 my-2"/>
             <div class="mx-2 my-1 text-left">
               <h2 id='chatlist-username' class="font-bold dark:text-white text-lg ">${chat.username}</h2>
-              <h4 class="text-slate-300 whitespace-pre">${(chat.sender?(chat.sender!=chat.username?'you' :chat.username):'')} ${(chat.sender?' : ':'')}${(chat.lastmsg?chat.lastmsg:'')}</h4>
+              <h4 class="text-slate-300 whitespace-pre">${(chat.sender ? (chat.sender != chat.username ? 'you' : chat.username) : '')} ${(chat.sender ? ' : ' : '')}${(chat.lastmsg ? chat.lastmsg : '')}</h4>
             </div>
           </li>
         </button>`;
-
           htmlArray.push(chatHtml);
         }
-
         const finalHtml = htmlArray.join("");
         document.getElementById("chat-list").innerHTML = finalHtml;
         // console.log(finalHtml);
@@ -289,7 +318,6 @@ export async function renderChats(username) {
   } catch (error) {
     console.error("Error: ", error)
   }
-
   isChatListClick();
 }
 

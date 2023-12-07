@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Enable CORS
-const allowedOrigins = ["http://localhost:5000", "http://192.168.164.183:5000", "https://kgp-connect.onrender.com"];
+const allowedOrigins = ["https://kgp-connect.onrender.com", "http://192.168.164.183:5000", "http://localhost:5000"];
 
 app.use(
   cors({
@@ -92,32 +92,33 @@ io.on("connection", (socket) => {
 
   socket.on("disconnect", async () => {
     // socket.broadcast.emit("userleft", "disconnected");
-    await socket.on("Offline", (username) => {
-      const userName = username+"offline";
+    await socket.on("Offline", (data) => {
+      const userName = data.sender+"offline";
       console.log(userName)
-      socket.broadcast.emit(userName);
+      socket.broadcast.emit(userName ,data.receiver );
     });
     console.log("a user disconnected");
   });
 
-  socket.on("sendingMSG", (msg, userName, userEmail) => {
-    socket.broadcast.emit(userName, msg);
-    console.log(msg, userName);
-  });
-  socket.on("chat-message", (msg) => {
-    console.log("message: " + msg);
-    socket.broadcast.emit("new-message", msg);
+  // socket.on("sendingMSG", (msg, userName, userEmail) => {
+  //   socket.broadcast.emit(userName, msg);
+  //   console.log(msg, userName);
+  // });
+  socket.on("sendingMSG", (data) => {
+    console.log("message: " + data.msg);
+    socket.broadcast.emit(data.receiver, {msg : data.msg , sender : data.sender});
     console.log("countcheck");
   });
 
-  socket.on("Online", (username) => {
-    const userName = username+"online";
-    socket.broadcast.emit(userName);
+  socket.on("Online", function(data){
+    const userName = data.sender+"online";
+    socket.broadcast.emit(userName, data.receiver);
   });
 
-  socket.on("typing", (username) => {
-    const userName = username+"typing";
-    socket.broadcast.emit(userName);
+  socket.on("typing", function(data) {
+    
+    const userName = data.sender+"typing";
+    socket.broadcast.emit(userName , data.receiver);
   });
 });
 

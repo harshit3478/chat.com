@@ -1,5 +1,6 @@
 import {
   autoScroll,
+  enterChat,
   isChatListClick,
   isUserListClick,
   mapUserList,
@@ -18,6 +19,10 @@ export var on_chat2 = document.querySelectorAll("#chatlist-username");
 
 // isChatListClick(); //check for chatlist clicks
 autoScroll();
+if (localStorage.getItem('lastChat')) {
+  
+  enterChat(localStorage.getItem('lastChat'))
+}
 
 
 searchBox.addEventListener("input", async function () {

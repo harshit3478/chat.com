@@ -21,7 +21,7 @@ exports.getmsgs = async (req, res, next) => {
       res.status(200).send(msg_archive.messages);
     }
     else {
-      res.status(401).send({ message: "NO such chat exists " });
+      res.status(200).send(msg_archive.messages);
     }
 
   } catch (error) {

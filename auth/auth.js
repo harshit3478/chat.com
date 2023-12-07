@@ -66,7 +66,7 @@ exports.login = async (req, res, next) => {
         if (result) {
           console.log(result)
           //json web token for authorization
-          const maxAge = 3 * 60 * 60;
+          const maxAge = 96 * 60 * 60;
           const token = jwt.sign(
             { id: person._id, username, email: person.email },
             jwtSecret,

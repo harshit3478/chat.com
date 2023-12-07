@@ -1,3 +1,5 @@
+
+
 const signup = document.getElementById("signup");
 const user = document.getElementById("username");
 const pass = document.getElementById("password");
@@ -40,8 +42,8 @@ async function handlesignup(e) {
       document.getElementById("msg-para-user").style.display = "none";
       document.getElementById("msg-para-pass").style.display = "block";
     } else if (response.status === 200) {
-      const data = await response.json();
-      console.log(data);
+      // const data = await response.json();
+      // console.log(data);
       alert("user registered succesfully");
       location.href = "/login";
     } else if (response.status === 410) {

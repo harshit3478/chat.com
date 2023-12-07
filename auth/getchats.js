@@ -3,11 +3,12 @@ const { ChatList } = require("../mongoose/chatlist");
 exports.getchats = async (req, res, next) => {
   const chat = await ChatList.findOne({ user: req.query.user });
   if (chat) {
-    chat.reverse();
+    chat.chats = chat.chats.reverse();
+    console.log(chat)
     res.status(200).send(chat);
   }
   else {
-    res.status(401).send({ Error: 'user not found ' });
+    res.status(200).send(chat);
   }
 
 };
@@ -23,10 +24,10 @@ exports.ischat = async ( req ,res , next)=>{
       res.status(200).send({message:true})
     }
     else{
-      res.status(402).send({message:false})
+      res.status(200).send({message:false})
     }
   } else {
-    res.status(420).send("user don't exist")
+    res.status(200).send({message:'userdontexist'})
     
   }
  } catch (error) {

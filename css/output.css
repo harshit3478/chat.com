@@ -578,10 +578,6 @@ video {
   position: fixed;
 }
 
-.absolute {
-  position: absolute;
-}
-
 .relative {
   position: relative;
 }
@@ -1327,11 +1323,6 @@ video {
 
 .shadow-cyan-300 {
   --tw-shadow-color: #67e8f9;
-  --tw-shadow: var(--tw-shadow-colored);
-}
-
-.shadow-indigo-200 {
-  --tw-shadow-color: #c7d2fe;
   --tw-shadow: var(--tw-shadow-colored);
 }
 
