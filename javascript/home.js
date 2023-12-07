@@ -69,10 +69,10 @@ try {
           audio.play()
         }, 200);
         setTimeout(() => {
-          renderChats(user_name);
           
         }, 1000);
       }
+      renderChats(user_name);
     });
   }
 } catch (error) {
