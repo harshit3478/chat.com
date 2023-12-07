@@ -22,7 +22,7 @@ export function ifPhone(){
         document.querySelector('.left').classList.add('w-screen' , 'h-screen')
         document.querySelector('.right').classList.add('hidden')
         document.querySelector('.right').classList.add('w-screen')
-        document.querySelector('#scroll-container').style.maxHeight = '73vh'
+        // document.querySelector('#scroll-container').style. = '73vh'
         document.querySelector('#scroll-container').classList.add('w-screen')
         // document.querySelectorAll('#scrt-msgs').forEach((e)=>{
         //     e.classList.remove('mr-3')
