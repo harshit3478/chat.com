@@ -26,7 +26,7 @@ switchTheme();
 try {
   const data = JSON.parse(localStorage.getItem("userData"));
   if (data) {
-    renderChats(data.username)
+    await renderChats(data.username)
     let user_name = data.username;
     let user_email = data.email;
     document.getElementById("user-name").innerHTML = user_name;
@@ -38,16 +38,22 @@ try {
       playAudio();
       if (field.value) {
         socket.emit("sendingMSG",{msg :field.value,sender:user_name,receiver:document.getElementById("inchat-name").innerHTML});
-        updateMsgs(
+        await updateMsgs(
           user_name,
           document.getElementById("inchat-name").innerHTML,
           field.value
         );
         autoScroll();
-        field.value = "";
-        setTimeout(() => {
-          renderChats(user_name);
-        }, 1000);
+       
+        const time = new Date();
+        const ct = (time.getDate() < 10 ? '0' : '') + time.getDate() + "-" + (time.getMonth() + 1 < 10 ? '0' : '') + (time.getMonth() + 1) + " " + (time.getHours() < 10 ? '0' : '') + time.getHours() + ":" + (time.getMinutes() < 10 ? '0' : '') + time.getMinutes()
+        let html = `<div class=" flex flex-col justify-start " style='align-items:end;width:95%' id="msg-sent">  <p class=" block dark:bg-neutral-950 p-1 text-white bg-indigo-400 mx-2 my-1 w-fit rounded-lg px-2 font-semibold text-lg dark:shadow-slate-800 mr-4 shadow-md">${field.value}</p><p class='text-sm text-slate-400 mr-4 shrink-0'>${ct}</p></div>`;
+        document.getElementById("scroll-container").innerHTML += html;
+        autoScroll();
+         field.value = "";
+        // setTimeout(() => {
+        //   renderChats(user_name);
+        // }, 1000);
       }
     });
     isTyping();
@@ -68,11 +74,11 @@ try {
           var audio = new Audio('/rcv.mp3')
           audio.play()
         }, 200);
-        setTimeout(() => {
-          
-        }, 1000);
       }
-      renderChats(user_name);
+      setTimeout(() => {
+        renderChats(user_name);
+      }, 500);
+      
     });
   }
 } catch (error) {
@@ -92,7 +98,8 @@ ifPhone()
 
 
 const searchMessages = document.getElementById('search-msgs')
-searchMessages.addEventListener('input', function () {
+searchMessages.addEventListener('input', function (e) {
+  e.preventDefault();
   if (!searchMessages.value) {
     renderMsgs();
   }else{

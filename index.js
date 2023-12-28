@@ -1,6 +1,5 @@
 const express = require("express");
 require("dotenv").config();
-
 const app = express();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
@@ -10,7 +9,8 @@ const server = http.createServer(app);
 const { Server } = require("socket.io");
 const { mongoconnect } = require("./mongoose/main.js");
 const path = require("path");
-const { userAuth } = require("./middleware/auth.js");
+const { userAuth, resetAuth } = require("./middleware/auth.js");
+const sgMail = require('@sendgrid/mail');
 
 
 
@@ -27,7 +27,7 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Enable CORS
-const allowedOrigins = ["https://kgp-connect.onrender.com", "http://192.168.164.183:5000", "http://localhost:5000"];
+const allowedOrigins = ["https://kgp-connect.onrender.com", "http://192.168.164.183:5000", "https://kgpconnect-9684280cf43d.herokuapp.com"];
 
 app.use(
   cors({
@@ -50,11 +50,11 @@ app.use("/api/auth", require("./auth/router.js"));
 mongoconnect();
 // dbconnect();
 //to log body parsing errors
-app.options("*", (req, res) => {
-  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.status(200).send();
-});
+// app.options("*", (req, res) => {
+//   res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+//   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+//   res.status(200).send();
+// });
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Something went wrong!");
@@ -62,12 +62,15 @@ app.use((err, req, res, next) => {
 
 
 
-  app.get("/", (req, res) => {
-    res.sendFile(__dirname + "/html/index.html");
-  });
-  
+
 
 // Define routes
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/html/index.html");
+});
+app.get('/reset' , (req, res)=>{
+  res.sendFile(__dirname + '/html/forgot.html')
+})
 
 app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/html/signup.html");
@@ -79,6 +82,10 @@ app.get("/home", userAuth, (req, res) => {
   
   res.sendFile(__dirname + "/html/mainpage.html");
 });
+app.get('/resetpassword' , resetAuth , (req ,res)=>{
+  // res.cookie("jwt", "", { maxAge: 1 });
+  res.sendFile(__dirname + '/html/changepassword.html')
+})
 app.get("/logout", (req, res) => {
   res.cookie("jwt", "", { maxAge: 1 });
 

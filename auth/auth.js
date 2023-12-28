@@ -3,17 +3,21 @@ const express = require('express');
 
 const { User } = require("../mongoose/userDetailSchema");
 const bcrypt = require("bcryptjs");
+const { json } = require("body-parser");
+const { salt } = require("./salt");
 require('dotenv').config();
 const app = express();
 
 
+
+  
 
 
 
 const jwtSecret = process.env.JWT_SECRET;
 
 exports.signup = async (req, res, next) => {
-  
+  console.log(typeof(salt))
   const { username, password, email } = req.body;
   console.log(username , password , email);
   if(!(username==='') && !(password==='') && !(email==='')){
@@ -23,7 +27,7 @@ exports.signup = async (req, res, next) => {
     array1 = (await is_user1).length;
     array2 = (await is_user2).length;
     if (!(array1 || array2)) {
-      bcrypt.hash(password, 10).then(async (hash) => {
+      bcrypt.hash(password, '$2a$10$kIb4bwk/dxcJLRVUvZN2fu').then(async (hash) => {
         await User.create({
           username,
           password: hash,
@@ -57,7 +61,7 @@ exports.login = async (req, res, next) => {
 
   
   try {
-    var person =
+   const  person =
       (await User.findOne({ username: username })) ||
       (await User.findOne({ email: username }));
 
@@ -82,7 +86,7 @@ exports.login = async (req, res, next) => {
           });
           res.status(200).send(person);
         } else {
-          res.status(410).send({ status: " error" });
+          res.status(410).send({ status: " error"  , message : 'password did not match '});
         }
       });
     } else {
@@ -96,5 +100,5 @@ else{
   res.status(412).send("fields can't be blank")
 }
 };
-
-
+// module.exports = salt;
+// module.exports = salt

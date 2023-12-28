@@ -6,7 +6,7 @@ const login = document.getElementById("login");
 // console.log(user_para);
 login.addEventListener("click", handleLogin);
 
-const url = "https://kgp-connect.onrender.com/api/auth/login";
+const url = "https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/login";
 
 async function handleLogin(e) {
   e.preventDefault();

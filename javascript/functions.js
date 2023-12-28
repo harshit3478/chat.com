@@ -4,15 +4,17 @@ import { user_list } from "./usersearch.js";
 
 //render msgs logic
 export function renderMsgs() {
+  console.log('rendering messages .... ')
   const user1 = document.getElementById("user-name").innerHTML;
   const user2 = document.getElementById("inchat-name").innerHTML;
   document.getElementById("scroll-container").innerHTML = "";
   fetch(
-    `https://kgp-connect.onrender.com/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
+    `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
     { method: "GET" }
   )
     .then((res) => res.json())
     .then((data) => {
+      document.getElementById("scroll-container").innerHTML = "";
       console.log(data);
       data.map((e) => {
         if (e.sender === user1) {
@@ -43,7 +45,7 @@ export function searchMsgs(value) {
   const searchPattern = new RegExp(value, "i");
   document.getElementById("scroll-container").innerHTML = "";
   fetch(
-    `https://kgp-connect.onrender.com/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
+    `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
     { method: "GET" }
   )
     .then((res) => res.json())
@@ -115,7 +117,7 @@ export function switchTheme() {
 export function isTyping() {
   //typing indicator logic
   field.addEventListener("input", function () {
-    socket.emit("typing", { sender: document.getElementById('user-name').innerHTML, receiver:document.getElementById("inchat-name").innerHTML  })
+    socket.emit("typing", { sender: document.getElementById('user-name').innerHTML, receiver: document.getElementById("inchat-name").innerHTML })
   });
   const userType =
     JSON.parse(localStorage.getItem("userData")).username + "typing";
@@ -133,11 +135,11 @@ export function isTyping() {
   });
 }
 export function isOnline() {
-  socket.on('connection' , ()=>{
+  socket.on('connection', () => {
     socket.emit("Online", { sender: document.getElementById("inchat-name").innerHTML, receiver: document.getElementById('user-name').innerHTML });
-  
+
     const userType = JSON.parse(localStorage.getItem("userData")).username + "online";
-  
+
     socket.on(userType, function (data) {
       if (data === document.getElementById("inchat-name").innerHTML) {
         var head = document.getElementById("last-active");
@@ -149,12 +151,12 @@ export function isOnline() {
   })
 }
 export function isOffline() {
-  socket.emit("Offline", {sender : document.getElementById("inchat-name").innerHTML , receiver : document.getElementById('user-name').innerHTML });
+  socket.emit("Offline", { sender: document.getElementById("inchat-name").innerHTML, receiver: document.getElementById('user-name').innerHTML });
 
   const userType =
     JSON.parse(localStorage.getItem("userData")).username + "offline";
   socket.on(userType, function () {
-    if(data === document.getElementById("inchat-name").innerHTML ){
+    if (data === document.getElementById("inchat-name").innerHTML) {
       var head = document.getElementById("last-active");
       setTimeout(() => {
         head.textContent = "last seen recently";
@@ -166,13 +168,13 @@ export function isOffline() {
 
 export async function updateMsgs(a, b, c) {
   await fetch(
-    `https://kgp-connect.onrender.com/api/auth/updatemsgs?sender=${a}&receiver=${b}&msg=${c}`,
+    `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/updatemsgs?sender=${a}&receiver=${b}&msg=${c}`,
     { method: "PUT" }
   ).catch((err) => {
     console.log(err);
   });
-  renderMsgs();
-  renderChats(a);
+  // renderMsgs();
+  // renderChats(a);
 }
 
 export async function mapUserList(arr) {
@@ -264,6 +266,7 @@ export function ifBackBtnClicked() {
       document.querySelector('.left').classList.remove('hidden')
       document.querySelector('.right').classList.add('hidden')
       localStorage.removeItem('lastChat')
+      renderChats(document.getElementById('user-name').innerHTML)
     })
   };
 }
@@ -271,35 +274,33 @@ export async function renderChats(username) {
   const htmlArray = [];
   document.getElementById("chat-list").innerHTML = "";
   try {
-    await fetch(`https://kgp-connect.onrender.com/api/auth/getchats?user=${username}`, {
-      method: "GET",
+    await fetch(`https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/getchats?user=${username}`, {
+      method: "GET"
     })
       .then((res) => res.json())
       .then(async (data) => {
-        if(localStorage.getItem('lastChat')){
+        if (localStorage.getItem('lastChat')) {
           console.log("is chat ")
-          var i = 0 ; var j= 0;
+          var i = 0; var j = 0;
 
           for (const chat of data.chats) {
-            console.log(chat.username , localStorage.getItem('lastChat'))
-            if(chat.username===localStorage.getItem('lastChat')){
+            console.log(chat.username, localStorage.getItem('lastChat'))
+            if (chat.username === localStorage.getItem('lastChat')) {
               j = i;
             }
-            i = i+1;
-          } 
+            i = i + 1;
+          }
 
-          const currenttop = await data.chats.splice(j ,1);
-          // data.chats = await data.chats.splice(j ,1);
-          console.log("first" , data.chats ,'currenttp' , currenttop)
-          // data.chats =  await data.chats.reverse();
-          // console.log("second" , data.chats)
+          const currenttop = await data.chats.splice(j, 1);
+         
+          console.log("first", data.chats, 'currenttp', currenttop)
+          
           await data.chats.unshift(currenttop[0]);
-          // console.log("third" , data.chats)
-          // data.chats = await data.chats.reverse();
-          console.log("final" , data.chats)
+          
+          console.log("final", data.chats)
 
         }
-for (const chat of data.chats) {
+        for (const chat of data.chats) {
           const chatHtml = `<button id="in-chat" class="w-full overflow-hidden">
           <li class="chat  list-none  m-0 p-0 flex items-center  hover:bg-slate-200" >
             <img src="/chat.png" alt="ntg" class="rounded-full w-14 h-14 mx-8 my-2"/>
@@ -324,7 +325,7 @@ for (const chat of data.chats) {
 
 export async function updateChats(user, newUser) {
   await fetch(
-    `https://kgp-connect.onrender.com/api/auth/updatechats?user=${user}&username=${newUser}`,
+    `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/updatechats?user=${user}&username=${newUser}`,
     { method: "PUT" }
   ).catch((err) => {
     console.error("Error:", err);

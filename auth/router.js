@@ -8,6 +8,8 @@ const {getmsgs} = require('./getmsgs')
 const { updatemsgs } = require('./updatemsgs.1');
 const {userAuth} = require('../middleware/auth');
 const { updatechats } = require('./updateChats');
+const { sendMail } = require('./sendmail');
+const { updatePassword } = require('./updatepassword');
 
 router.route('/login').post(login);
 router.route('/signup').post(signup);
@@ -17,4 +19,6 @@ router.route('/getmsgs').get(getmsgs)
 router.route("/updatechats").put(updatechats)
 router.route("/getchats").get(getchats)
 router.route("/ischat").get(ischat)
+router.route('/sendmail').get(sendMail)
+router.route('/updatepassword').put(updatePassword)
 module.exports  = router;

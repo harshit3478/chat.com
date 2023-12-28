@@ -5,6 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <link href="../css/output.css" rel="stylesheet" />
   </link>
 </meta>
@@ -21,7 +22,7 @@
         field's can't be blank
     </p>
       <form class="grid" method="post" action="/login">
-        <label class="block m-4">
+        <label class="block mx-4 my-1">
           <span class="block text-sm font-medium text-slate-700 my-3">
             Username/ Email
           </span>
@@ -35,7 +36,7 @@
           />
         </label>
 
-        <label class="block m-4">
+        <label class="block mx-4 my-1">
           <span class="block text-sm font-medium text-slate-700 my-3">
             Password
           </span>
@@ -47,6 +48,9 @@
             placeholder="password"
            
           />
+          <span> <a class="text-sm  text-slate-400 hover:underline my-2" href="/reset"
+            >Forgot password</a
+          ></span>
           <p class="peer:invalid:block text-sm shrink-0 hidden text-pink-400" id="msg-para">
               wrong username/password
           </p>

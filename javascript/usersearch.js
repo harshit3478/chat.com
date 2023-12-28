@@ -31,7 +31,7 @@ searchBox.addEventListener("input", async function () {
   if (searchBox.value) {
     user_list.innerHTML = "";
     await fetch(
-      `https://kgp-connect.onrender.com/api/auth/search?search=${searchBox.value}`,
+      `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/search?search=${searchBox.value}`,
       {
         method: "GET",
       }

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>socket.io</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" type="text/css" href="../css/output.css">
+</head>
+<body
+    class="flex justify-center items-center bg-gradient-to-r from-blue-500 from-20% via-indigo-400 via-40% to-purple-500"
+  >
+    <div class="my-40 font-bold md:min-w-30 min-w-full mx-auto bg-white rounded-xl shadow-xl">
+      <!-- <p class="peer:invalid:block text-lg text-center mt-5 m-2 font-serif shadow-md shadow-cyan-300  shrink-0 hidden text-blue-600" id="user-don't-exist">
+        User don't exist please register first 
+    </p>
+      -->
+      <form class="grid" method="post" action="/login">
+        <label class="block m-4">
+          <span class="block text-sm font-medium text-slate-700 my-3">
+            Username/Email
+          </span>
+          <input
+            class="mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 invalid:text-pink-400 invalid:ring invalid:ring-pink-500"
+            type="text"
+            name="username"
+            id="username"
+            placeholder="username/email"
+           
+          />
+          
+        <p class="peer:invalid:block text-sm shrink-0 hidden text-pink-400" id="not-exist">
+            user does not exist 
+        </p>
+        </label>
+        
+
+       
+        <div class="space-x-5 justify-around flex items-center">
+          <a class="text-md text-slate-400 hover:underline" href="/signup"
+            >Signup</a
+          >
+          <a class="text-md text-slate-400 hover:underline" href="/login"
+            >Login</a
+          >
+          <button
+            class="bg-gradient-to-r from-indigo-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 max-w-sm m-auto text-slate-800 font-medium rounded-xl p-2 my-3 focus:ring focus:ring-sky-500"
+            type="submit" id="reset"
+          >
+           Reset Password
+          </button>
+        </div>
+      </form>
+    </div>
+    <script src="../javascript/reset.js" type="module"></script>
+  </body>
+</html>

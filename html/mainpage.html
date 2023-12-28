@@ -4,8 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Socket.io chat app</title>
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
   </head>
   <link rel="stylesheet" href="./css/output.css" />
+  <link rel="shortcut icon" href="/icon.png" type="image/x-icon">
   <body
     class="selection:text-blue-500 bg-gradient-to-b from-sky-300 to-blue-400 dark:bg-slate-800 min-h-screen fixed right-0 w-full"
   >
@@ -15,12 +17,8 @@
       >
         <li>
           <a href="/logout"
-            ><button
-              class="bg-green-400 dark:bg-pink-400 rounded-md font-semibold  font-sans md:text-lg  md:mr-28 px-2 ml-5"
-            >
-              Log out
-            </button></a
-          >
+            ><button class="bg-green-400 dark:bg-pink-400 rounded-md font-semibold  font-sans md:text-lg  md:mr-28 px-2 ml-5"
+            >Log out</button></a>
         </li>
       
         <div class="flex p-4 space-x-8 right-0 md:mr-20 items-center dark:text-white">
@@ -46,8 +44,8 @@
             id="theme"
             class="m-5"
           >
-          <span class="dark:hidden" ><img class="w-5 rounded-full " src="/brightness.png" alt=""></span>
-           <span class="hidden dark:inline"><img class="w-5 rounded-full " src="/moon.png" alt=""></span>
+          <span class="dark:hidden" ><img class="w-5 rounded-full " src="/brightness.png" alt="bright"></span>
+           <span class="hidden dark:inline"><img class="w-5 rounded-full " src="/moon.png" alt="dark"></span>
           </button>
           
         </li>
@@ -118,31 +116,31 @@
             />
           </div>
         </div>
-        <div
-          id="scroll-container"
+        <div id="scroll-container" 
           class="scroll-auto dark:bg-slate-800 first:mt-8 last:mb-5 dark:text-white overflow-y-scroll w-full no-scrollbar scroll-m-4 flex flex-col"
-          style="max-height: 60vh"
+          style="height:67vh;"
         ></div>
-        <div class="fixed bottom-2 m-2 w-full flex justify-center">
-          <form class="md:p-1 md:flex md:w-4/5 p-1 flex w-4/5 relative -left-5" action="" id="form">
+        <div class="message-box fixed bottom-2 m-auto md:w-3/4 w-full flex justify-center">
+          <form class="md:p-1 md:flex md:w-full md:m-auto p-1 flex w-full m-auto" action="" id="form">
             <input
-              class="w-full rounded-md outline outline-1 outline-black placeholder:text-md placeholder:font-semibold placeholder:m-2"
+              class="w-full rounded-md px-2 py-1 outline outline-1 outline-black placeholder:text-md placeholder:font-semibold placeholder:m-2"
               autocomplete="off"
               id="input"
               placeholder="Type your message..."
             />
             <span>
-              <button class="mx-3" id="send-btn">
+              <button class="mx-1" id="send-btn">
                 <img
                   src="/icons-send.png"
                   alt="nothing "
                   class="rounded-full w-8"
-                /></button
-            ></span>
+                />
+              </button>
+            </span>
           </form>
         </div>
       </div>
-      <div class=" dark:bg-slate-800  w-3/4 bg-gradient-to-b from-sky-300 to-blue-400 flex justify-center items-center" style="min-height: 87vh;"  id="homepage-img"><span class=""><img class="w-9 m-1 bg-blend-multiply" src="/padlock.png" alt=""></span><span class="text-xl font-semibold">End to end encrypted messages</span> </div>
+      <div class=" dark:bg-slate-800 w-3/4 bg-gradient-to-b from-sky-300 to-blue-400 flex justify-center items-center" style="min-height: 87vh;"  id="homepage-img"><span class=""><img class="w-9 m-1 bg-blend-multiply" src="/padlock.png" alt=""></span><span class="text-xl font-semibold">End to end encrypted messages</span> </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script type="module" src="../javascript/usersearch.js"></script>

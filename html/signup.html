@@ -12,7 +12,7 @@
 <body class="bg-gradient-to-r from-blue-500 from-20% via-indigo-400 via-40% to-purple-500 flex justify-center items-center">
     <div class="my-40 font-bold md:min-w-30 min-w-full mx-auto bg-white rounded-xl shadow-xl ">
         <form class="grid" method="post"  action="/signup">
-            <label class="block m-4">
+            <label class="block m-2 mx-4">
                 <span class="block text-sm font-medium text-slate-700 my-3">
                     Username
                 </span>
@@ -21,7 +21,7 @@
                    user already exists!
                 </p>
             </label>
-            <label class="block m-4">
+            <label class="block m-2 mx-4">
                 <span class="block text-sm font-medium text-slate-700 my-3">
                     Password
                 </span>
@@ -30,20 +30,30 @@
                     password must be atleast 8 characters long !!
                  </p>
             </label>
-            <label class="block m-4">
+            <label class="block m-2 mx-4">
                 <span class="block text-sm font-medium text-slate-700 my-3">
                     Email
                 </span>
                 <input class="peer mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 " type="email" name="email" placeholder="Email" id="email" required />
+                
                 <p class="peer:invalid:block text-sm shrink-0 hidden text-pink-400" id="msg-para-email">
                     email already exists!
                  </p>
             </label>
+            <label class="my-1 hidden mx-4 " id="otp-field">
+                <span class="block text-sm font-medium text-slate-700 my-3">  OTP </span>
+                <input class="peer mt-1 block w-full px-3 py-2 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400 " type="text" name="otp" placeholder="otp" id="otp" required />
+                <p class="peer:invalid:block text-sm shrink-0 hidden text-pink-400" id="otp-para"> wrong otp!!! </p>
+            </label>
             <div class="space-x-5 justify-around flex items-center ">
             <a class="text-md text-slate-400 hover:underline " href="/login">Login instead</a>
-            <button class="bg-gradient-to-r from-indigo-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 max-w-sm m-auto text-slate-800 font-medium dark:text-white rounded-xl p-2 my-3 focus:ring focus:ring-sky-500" type="submit" id="signup">
+            <button class="hidden bg-gradient-to-r from-indigo-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 max-w-sm m-auto text-slate-800 font-medium dark:text-white rounded-xl p-2 my-3 focus:ring focus:ring-sky-500" type="submit" id="signup">
                 Sign up 
             </button>
+            <!-- <button class=" bg-gradient-to-r from-indigo-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 max-w-sm m-auto text-slate-800 font-medium dark:text-white rounded-xl p-2 my-3 focus:ring focus:ring-sky-500" type="submit" id="signup">
+                Validate Email
+            </button> -->
+            <button id="validate" class=" bg-fuchsia-500 text-white text-center p-1 font-semibold my-1 hover:rounded-md hover:bg-fuchsia-600">Validate Email</button>
         </div>
         </form>
     </div>
