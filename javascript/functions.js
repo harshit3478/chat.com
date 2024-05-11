@@ -9,7 +9,7 @@ export function renderMsgs() {
   const user2 = document.getElementById("inchat-name").innerHTML;
   document.getElementById("scroll-container").innerHTML = "";
   fetch(
-    `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
+    `/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
     { method: "GET" }
   )
     .then((res) => res.json())
@@ -45,7 +45,7 @@ export function searchMsgs(value) {
   const searchPattern = new RegExp(value, "i");
   document.getElementById("scroll-container").innerHTML = "";
   fetch(
-    `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
+    `/api/auth/getmsgs?sender=${user1}&receiver=${user2}`,
     { method: "GET" }
   )
     .then((res) => res.json())
@@ -168,7 +168,7 @@ export function isOffline() {
 
 export async function updateMsgs(a, b, c) {
   await fetch(
-    `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/updatemsgs?sender=${a}&receiver=${b}&msg=${c}`,
+    `/api/auth/updatemsgs?sender=${a}&receiver=${b}&msg=${c}`,
     { method: "PUT" }
   ).catch((err) => {
     console.log(err);
@@ -274,7 +274,7 @@ export async function renderChats(username) {
   const htmlArray = [];
   document.getElementById("chat-list").innerHTML = "";
   try {
-    await fetch(`https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/getchats?user=${username}`, {
+    await fetch(`/api/auth/getchats?user=${username}`, {
       method: "GET"
     })
       .then((res) => res.json())
@@ -325,7 +325,7 @@ export async function renderChats(username) {
 
 export async function updateChats(user, newUser) {
   await fetch(
-    `https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/updatechats?user=${user}&username=${newUser}`,
+    `/api/auth/updatechats?user=${user}&username=${newUser}`,
     { method: "PUT" }
   ).catch((err) => {
     console.error("Error:", err);

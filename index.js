@@ -27,20 +27,22 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 // Enable CORS
-const allowedOrigins = ["https://kgp-connect.onrender.com", "http://192.168.164.183:5000", "https://kgpconnect-9684280cf43d.herokuapp.com"];
+const allowedOrigins = ["https://kgp-connect.onrender.com", "http://192.168.164.183:5000", "http://localhost:5000"];
 
 app.use(
-  cors({
-    origin: function (origin, callback) {
-      // Check if the origin is in the list of allowed origins or if it's not defined (e.g., a same-origin request)
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
+  cors(
+  //   {
+  //   origin: function (origin, callback) {
+  //     // Check if the origin is in the list of allowed origins or if it's not defined (e.g., a same-origin request)
+  //     if (!origin || allowedOrigins.includes(origin)) {
+  //       callback(null, true);
+  //     } else {
+  //       callback(new Error("Not allowed by CORS"));
+  //     }
+  //   },
+  //   credentials: true,
+  // }
+)
 );
 
 //Routes

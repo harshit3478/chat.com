@@ -4,7 +4,7 @@ reset.addEventListener('click' , async(e)=>{
     e.preventDefault();
     const ema = document.getElementById('username')
     const to = ema.value;
-  await fetch(`https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/sendmail?to=${to}&username=${to}`, { method: 'GET' })
+  await fetch(`/api/auth/sendmail?to=${to}&username=${to}`, { method: 'GET' })
     .then((res) => 
       res.json()).then((data)=>{
         console.log(data);

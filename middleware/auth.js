@@ -14,16 +14,12 @@ exports.userAuth = (req, res, next) => {
         }
       });
     } else {
-      res.status(401)
-      .redirect('/')
-      // location.assign('/')
-      
+      res.status(401).redirect("/");
     }
   } catch (error) {
-    console.error("Error:" , error)
+    console.error("Error:", error);
     res.status(400).send(error);
   }
-  
 };
 exports.resetAuth = (req, res, next) => {
   const token = req.cookies.jwt;
@@ -37,14 +33,14 @@ exports.resetAuth = (req, res, next) => {
         }
       });
     } else {
-      res.status(401).send("<h1>This link is expired , do try again  , try again </h1> ")
-   
+      res
+        .status(401)
+        .send("<h1>This link is expired , do try again  , try again </h1> ");
+
       // location.assign('/')
-      
     }
   } catch (error) {
-    console.error("Error:" , error)
+    console.error("Error:", error);
     res.status(400).send(error);
   }
-  
 };

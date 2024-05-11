@@ -13,7 +13,7 @@ change.addEventListener('click', async (e) => {
         if (password.value === confirmPassword.value) {
     
             console.log(password.value, 'password.value')
-            await fetch('https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/updatepassword', {
+            await fetch('/api/auth/updatepassword', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

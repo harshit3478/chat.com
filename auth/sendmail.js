@@ -20,8 +20,8 @@ exports.sendMail = async(req, res, next) => {
                     email: 'harshit@kgpian.iitkgp.ac.in',
                 },
                 subject: "Reset Your Password  ",
-                text: `This mail is sent you to reset your password  , your reset password link  is  : https://kgpconnect-9684280cf43d.herokuapp.com/resetpassword?user=${user.username}  `,
-                html: `<div class='shadow-sm shado-black w-auto h-auto ><p class='text-black font-bold' > This mail is sent you to reset your password  ,click on this link to reset your password  : https://kgpconnect-9684280cf43d.herokuapp.com/resetpassword?user=${user.username} </p></div>`
+                text: `This mail is sent you to reset your password  , your reset password link  is  : /resetpassword?user=${user.username}  `,
+                html: `<div class='shadow-sm shado-black w-auto h-auto ><p class='text-black font-bold' > This mail is sent you to reset your password  ,click on this link to reset your password  : /resetpassword?user=${user.username} </p></div>`
             }
             sgMail.send(message).then((res) => {
                 console.log('message sent ....')

@@ -20,5 +20,5 @@ router.route("/updatechats").put(updatechats)
 router.route("/getchats").get(getchats)
 router.route("/ischat").get(ischat)
 router.route('/sendmail').get(sendMail)
-router.route('/updatepassword').put(updatePassword)
+router.route('/updatepassword').put(userAuth , updatePassword)
 module.exports  = router;

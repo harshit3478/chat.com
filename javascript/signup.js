@@ -12,7 +12,7 @@ var otp;
 validate.addEventListener('click', async (e) => {
   e.preventDefault();
   const to = ema.value;
-  await fetch(`https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/sendmail?to=${to}`, { method: 'GET' })
+  await fetch(`/api/auth/sendmail?to=${to}`, { method: 'GET' })
     .then((res) => 
       res.json()).then((data)=>{
         console.log(data);
@@ -31,7 +31,7 @@ validate.addEventListener('click', async (e) => {
 })
 signup.addEventListener("click", handlesignup);
 
-const url = "https://kgpconnect-9684280cf43d.herokuapp.com/api/auth/signup";
+const url = "/api/auth/signup";
 
 async function handlesignup(e) {
   e.preventDefault();
